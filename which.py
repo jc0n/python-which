@@ -5,6 +5,9 @@ import platform
 __author__ = 'John O\'Connor'
 __version__ = '0.1'
 
+class CommandNotFoundException(Exception):
+    """Raised when `which` fails to locate a proper command path."""
+
 def which(cmd):
 # based on solutions from
 # http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
@@ -31,5 +34,5 @@ def which(cmd):
                 if is_executable(candidate):
                     return candidate
 
-    return None
+    raise CommandNotFoundException(cmd)
 
